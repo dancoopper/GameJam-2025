@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwpgpns0nrw5k"]
+
+[ext_resource type="PackedScene" uid="uid://brm2byfvhgxbj" path="res://player.tscn" id="1_0f027"]
+[ext_resource type="PackedScene" uid="uid://uqqauaecra4u" path="res://wall.tscn" id="2_2c62f"]
+
+[sub_resource type="Environment" id="Environment_2c62f"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o3jxj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o3jxj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2c62f"]
+in_3d_space = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3jxj"]
+albedo_color = Color(0.568627, 0.678431, 0.521569, 1)
+normal_texture = SubResource("NoiseTexture2D_2c62f")
+
+[sub_resource type="BoxMesh" id="BoxMesh_0f027"]
+material = SubResource("StandardMaterial3D_o3jxj")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2c62f")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_o3jxj")
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(3.22313, 0, 0, 0, 0.0510062, 0, 0, 0, 3.63729, 0, 0, 0)
+shape = SubResource("BoxShape3D_o3jxj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_0f027")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.731354, 0.681998, 0, -0.681998, 0.731354, 1.16106, 12.4062, 6.27351)
+
+[node name="Node3D" parent="." instance=ExtResource("1_0f027")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0673761, 1.0255, 0.474694)
+
+[node name="RigidBody3D2" parent="." instance=ExtResource("2_2c62f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198989, 0.525503, -1.3078)
