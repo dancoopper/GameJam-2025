@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://ukres0bn41ku"]
+
+[ext_resource type="PackedScene" uid="uid://brm2byfvhgxbj" path="res://player.tscn" id="1_ay2ua"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ay2ua"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Recursion-test" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(9.5994, 0, 0, 0, 0.105751, 0, 0, 0, 9.55932, -4.77392, -0.195637, 0)
+use_collision = true
+size = Vector3(2.99463, 1, 2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(-2.38419e-07, -0.105751, 0, 9.5994, 0, 0, 0, 0, 9.55932, 9.47124, 8.42809, 0)
+use_collision = true
+size = Vector3(1.78671, 1, 2)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_ay2ua")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.130948, 1.26301, -0.310961)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.506834, 0.690022, -0.51671, -0.251245, 0.691618, 0.677156, 0.824618, -0.213385, 0.5239, 0, 4.65215, 0)
+shadow_enabled = true
+shadow_transmittance_bias = 0.0
+shadow_opacity = 0.92
+shadow_blur = 0.608
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(9.55343e-16, 3.65072e-30, -0.5, -2.18557e-08, 0.5, -7.9789e-38, 0.5, 2.18557e-08, 9.55343e-16, 9.31428, 2.42295, 2)
+texture = SubResource("ViewportTexture_ay2ua")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(512, 1024)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 1.91069e-15, 1, 1, 4.37114e-08, -4.37114e-08, 0.475168, 11.6492, 0)
+keep_aspect = 0
