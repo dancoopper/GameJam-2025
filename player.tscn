@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgxnag5qrnnw4"]
+[gd_scene load_steps=5 format=3 uid="uid://brm2byfvhgxbj"]
 
 [ext_resource type="Script" uid="uid://bi86y3bs5rn1g" path="res://Player.cs" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://cq5csxw6masky" path="res://teleporter.tscn" id="2_onrkg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -16,7 +17,7 @@ shape = SubResource("CapsuleShape3D_sh265")
 mesh = SubResource("CapsuleMesh_4flbx")
 skeleton = NodePath("../CollisionShape3D")
 
-[node name="Head" type="Node3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Head" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730288, -0.109056)
+
+[node name="Teleporter" parent="." instance=ExtResource("2_onrkg")]
