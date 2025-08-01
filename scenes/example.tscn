@@ -77,15 +77,6 @@ other_portal = NodePath("../Portal1")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.129375, -0.733278, 0.667507, 0.529991, 0.620079, 0.578456, -0.838076, 0.278935, 0.468853, 0, 5.80767, 0)
 
-<<<<<<< HEAD
-[node name="CSGTorus3D" type="CSGTorus3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.01822, 0.68691, 0)
-material_override = ExtResource("4_ucs8h")
-inner_radius = 0.347
-outer_radius = 1.442
-sides = 14
-ring_sides = 8
-=======
 [node name="RigidBody3D" type="RigidBody3D" parent="." groups=["pickable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.58528, 1.12849, 0)
 script = ExtResource("4_ucs8h")
@@ -107,4 +98,3 @@ parent_to_teleport = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aoc7i")
->>>>>>> player_interaction
