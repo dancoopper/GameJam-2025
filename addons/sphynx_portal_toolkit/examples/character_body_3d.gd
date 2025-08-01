@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var spring_arm: SpringArm3D
+@export var cam: Camera3D
 @export var move_speed: float = 5.0
 @export var jump_force: float = 8.0
 @export var gravity: float = 20.0
@@ -9,7 +9,7 @@ func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("A", "D", "S", "W")
 	
 	# Movement relative to camera view
-	var cam_basis = spring_arm.global_transform.basis
+	var cam_basis = cam.global_transform.basis
 	var forward = -cam_basis.z.normalized()
 	var right = cam_basis.x.normalized()
 	var direction = (right * input_dir.x + forward * input_dir.y).normalized()

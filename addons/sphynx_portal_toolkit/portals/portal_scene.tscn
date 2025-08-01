@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://d3b3awue80a6c"]
 
 [ext_resource type="Material" uid="uid://c5ht6tlhbi7o2" path="res://addons/sphynx_portal_toolkit/portals/portal_material.tres" id="1_1og6m"]
-[ext_resource type="Script" path="res://addons/sphynx_portal_toolkit/portals/portal.gd" id="1_s7yg8"]
+[ext_resource type="Script" uid="uid://d2vgodjiu03vl" path="res://addons/sphynx_portal_toolkit/portals/portal.gd" id="1_s7yg8"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_gichd"]
 

@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://c86uu6818k5gv"]
+
+[ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="1_g2h75"]
+[ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="2_m7ahb"]
+[ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="3_dwgg1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ru4tf"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_dwgg1")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7ahb"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_dwgg1")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[node name="Level1" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Node3D"]
+use_collision = true
+size = Vector3(15.7385, 1, 15.9338)
+
+[node name="Wall" type="CSGCombiner3D" parent="Node3D"]
+visible = false
+use_collision = true
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Node3D/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.37866, 0)
+use_collision = true
+size = Vector3(15.7385, 1, 15.9338)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D/Wall"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -7.35839, 4.68735, 0)
+use_collision = true
+size = Vector3(10.4212, 1, 15.9338)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Node3D/Wall"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 7.3728, 4.68735, 0)
+use_collision = true
+size = Vector3(10.4212, 1, 15.9338)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D/Wall"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.64406, -7.44196)
+use_collision = true
+size = Vector3(15.7385, 1, 10.5078)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D/Wall"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.64406, 7.52329)
+use_collision = true
+size = Vector3(15.7385, 1, 10.5078)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/Wall"]
+transform = Transform3D(3.78077, 0, 0, 0, 4.76498, 0, 0, 0, 1.17445, 0, 2.912, -7.52667)
+operation = 2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.92485, 0)
+omni_range = 14.0623
+
+[node name="Portal1" parent="Node3D" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_m7ahb")]
+transform = Transform3D(3.80821, 0, 1.74846e-07, 0, 4.79935, 0, -6.65848e-07, 0, 1, 0.00136614, 2.67157, -6.78072)
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_ru4tf")
+recursions = 1
+other_portal = NodePath("../Portal2")
+
+[node name="Portal2" parent="Node3D" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_m7ahb")]
+transform = Transform3D(3.80821, 0, 0, 0, 2.28453, 0.879441, 0, -4.22074, 0.476008, -0.0955436, 4.75137, 3.01892)
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_m7ahb")
+recursions = 1
+other_portal = NodePath("../Portal1")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_g2h75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.117927, 2.40613, -0.642668)
