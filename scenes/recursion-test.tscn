@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgq62dhe61mfl"]
+[gd_scene load_steps=5 format=3 uid="uid://dxjrbtp1bd5s3"]
 
-[ext_resource type="PackedScene" uid="uid://brm2byfvhgxbj" path="res://player.tscn" id="1_ay2ua"]
-[ext_resource type="Material" uid="uid://br5415njcharg" path="res://blue-material.tres" id="2_nfr5u"]
-[ext_resource type="Material" uid="uid://bf46gowxqjger" path="res://red-material.tres" id="3_egs2q"]
-[ext_resource type="PackedScene" uid="uid://b536pnxm70il" path="res://Portal.tscn" id="4_foqyl"]
+[ext_resource type="PackedScene" uid="uid://brm2byfvhgxbj" path="res://objs/player.tscn" id="1_efdcf"]
+[ext_resource type="Material" uid="uid://br5415njcharg" path="res://mats/blue-material.tres" id="2_sm8kg"]
+[ext_resource type="Material" uid="uid://bf46gowxqjger" path="res://mats/red-material.tres" id="3_or7k6"]
+[ext_resource type="PackedScene" uid="uid://b536pnxm70il" path="res://objs/portal.tscn" id="4_vlm1k"]
 
 [node name="Recursion-test" type="Node3D"]
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_ay2ua")]
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_efdcf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79095, 2.50313, -16.3244)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -17,50 +17,50 @@ shadow_enabled = true
 
 [node name="Floor1" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.267822, 0)
-material_override = ExtResource("2_nfr5u")
+material_override = ExtResource("2_sm8kg")
 use_collision = true
 size = Vector3(15.9502, 0.464355, 16.1396)
 
 [node name="Floor2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.267822, -18.9762)
-material_override = ExtResource("3_egs2q")
+material_override = ExtResource("3_or7k6")
 use_collision = true
 size = Vector3(15.9502, 0.464355, 16.1396)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97987, 0.411184, 3.85093)
-material_override = ExtResource("2_nfr5u")
+material_override = ExtResource("2_sm8kg")
 use_collision = true
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.12095, 0.411184, -13.5139)
-material_override = ExtResource("3_egs2q")
+material_override = ExtResource("3_or7k6")
 use_collision = true
 
 [node name="CSGBox3D11" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9894, 0.411183, -19.2969)
-material_override = ExtResource("3_egs2q")
+material_override = ExtResource("3_or7k6")
 use_collision = true
 
 [node name="CSGBox3D12" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6069, 0.411184, -23.1844)
-material_override = ExtResource("3_egs2q")
+material_override = ExtResource("3_or7k6")
 use_collision = true
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29501, 0.411184, -2.09495)
-material_override = ExtResource("2_nfr5u")
+material_override = ExtResource("2_sm8kg")
 use_collision = true
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75803, 0.411184, 5.94484)
-material_override = ExtResource("2_nfr5u")
+material_override = ExtResource("2_sm8kg")
 use_collision = true
 
-[node name="PortalA" parent="." node_paths=PackedStringArray("DestinationPortal") instance=ExtResource("4_foqyl")]
+[node name="PortalA" parent="." node_paths=PackedStringArray("DestinationPortal") instance=ExtResource("4_vlm1k")]
 transform = Transform3D(3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, 0.189585, -0.0705192, 0.362647)
 DestinationPortal = NodePath("../PortalB")
 
-[node name="PortalB" parent="." node_paths=PackedStringArray("DestinationPortal") instance=ExtResource("4_foqyl")]
+[node name="PortalB" parent="." node_paths=PackedStringArray("DestinationPortal") instance=ExtResource("4_vlm1k")]
 transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 0.189585, -0.0705192, -18.8795)
 DestinationPortal = NodePath("../PortalA")
