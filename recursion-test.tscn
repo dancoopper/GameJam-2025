@@ -8,7 +8,7 @@
 [node name="Recursion-test" type="Node3D"]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_ay2ua")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79095, 2.50313, -18.6743)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79095, 2.50313, -16.3244)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.737643, -0.437757, -0.514054, 0.675191, 0.478248, 0.561601, 0, -0.761346, 0.648346, 0, 10.9807, 0)
@@ -32,21 +32,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97987, 0.411184, 3.85093)
 material_override = ExtResource("2_nfr5u")
 use_collision = true
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.50052, 0.411184, -13.3522)
-material_override = ExtResource("3_egs2q")
-use_collision = true
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.93243, 0.411184, -24.6537)
-material_override = ExtResource("3_egs2q")
-use_collision = true
-
-[node name="CSGBox3D9" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.26529, 0.411182, -19.9501)
-material_override = ExtResource("3_egs2q")
-use_collision = true
-
 [node name="CSGBox3D10" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.12095, 0.411184, -13.5139)
 material_override = ExtResource("3_egs2q")
@@ -62,21 +47,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6069, 0.411184, -23.1844)
 material_override = ExtResource("3_egs2q")
 use_collision = true
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.74117, 0.411184, 5.92509)
-material_override = ExtResource("2_nfr5u")
-use_collision = true
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25754, 0.411184, -3.42594)
-material_override = ExtResource("2_nfr5u")
-use_collision = true
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0551558, 0.411184, 6.05368)
-material_override = ExtResource("2_nfr5u")
-use_collision = true
-
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29501, 0.411184, -2.09495)
 material_override = ExtResource("2_nfr5u")
@@ -88,9 +58,9 @@ material_override = ExtResource("2_nfr5u")
 use_collision = true
 
 [node name="PortalA" parent="." node_paths=PackedStringArray("DestinationPortal") instance=ExtResource("4_foqyl")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.189585, -0.0705192, 0.362647)
+transform = Transform3D(3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, 0.189585, -0.0705192, 0.362647)
 DestinationPortal = NodePath("../PortalB")
 
 [node name="PortalB" parent="." node_paths=PackedStringArray("DestinationPortal") instance=ExtResource("4_foqyl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.189585, -0.0705192, -18.8795)
+transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 0.189585, -0.0705192, -18.8795)
 DestinationPortal = NodePath("../PortalA")

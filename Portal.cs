@@ -3,11 +3,12 @@ using System;
 
 public partial class Portal : Node3D
 {
-	[Export] public Node3D DestinationPortal;
-
+	[Export] public Portal DestinationPortal;
 	private MeshInstance3D _portalSurface;
 	private SubViewport _subViewport;
 	private Camera3D _portalCamera;
+
+	private bool _isTeleportEnabled = true;
 
 	public override void _Ready()
 	{
@@ -19,8 +20,9 @@ public partial class Portal : Node3D
 		_subViewport.Size = new Vector2I((int)screenSize.X, (int)screenSize.Y);
 
 		var material = _portalSurface.GetActiveMaterial(0) as ShaderMaterial;
-		if (material != null) 
+		if (material != null) {
 			material.SetShaderParameter("portal_view", _subViewport.GetTexture());
+		}
 	}
 
 	public override void _Process(double delta)
@@ -28,13 +30,31 @@ public partial class Portal : Node3D
 		var playerCam = GetViewport().GetCamera3D();
 		if (playerCam == null || DestinationPortal == null || _portalCamera == null)
 			return;
+			
+		_portalCamera.Rotation = Rotation;
 
-		// Convert player's transform into local space of this portal
 		var localTransform = GlobalTransform.AffineInverse() * playerCam.GlobalTransform;
-
-		// Apply that local transform to destination portal
 		var transformed = DestinationPortal.GlobalTransform * localTransform;
-
 		_portalCamera.GlobalTransform = transformed;
+	}
+	
+	public void OnBodyEntered(Node3D body) {
+		if (_isTeleportEnabled) {
+			_isTeleportEnabled = false;
+			
+			var offset = body.Position - Position;
+			var newPosition = DestinationPortal.Position + offset;
+			
+			DestinationPortal.OnTeleportedTo();
+			body.Position = newPosition;
+		}
+	}
+	
+	public void OnTeleportedTo() {
+		_isTeleportEnabled = false;
+	}
+
+	public void OnBodyExited(Node3D body) {
+		_isTeleportEnabled = true;
 	}
 }
