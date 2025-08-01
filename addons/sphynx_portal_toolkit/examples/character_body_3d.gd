@@ -1,14 +1,29 @@
 extends CharacterBody3D
 
-@export var spring_arm : SpringArm3D
+@export var spring_arm: SpringArm3D
+@export var move_speed: float = 5.0
+@export var jump_force: float = 8.0
+@export var gravity: float = 20.0
 
-func _process(delta: float) -> void:
-	var movement_input : Vector2 = Input.get_vector("A", "D", "W", "S")
+func _physics_process(delta: float) -> void:
+	var input_dir = Input.get_vector("A", "D", "S", "W")
 	
-	var movement_3D_input : Vector3 = Vector3(movement_input.x, Input.get_vector("Q", "E", "A", "D").x, movement_input.y) * 2;
+	# Movement relative to camera view
+	var cam_basis = spring_arm.global_transform.basis
+	var forward = -cam_basis.z.normalized()
+	var right = cam_basis.x.normalized()
+	var direction = (right * input_dir.x + forward * input_dir.y).normalized()
 	
-	var input_velocity : Vector3 = Basis((spring_arm.basis * basis).x, Vector3(0, 1, 0), (spring_arm.basis * basis).x.cross(Vector3(0, 1, 0))) * movement_3D_input
-	
-	velocity = Vector3(input_velocity.x, velocity.y + -20 * delta, input_velocity.z)
-	
+	var horizontal_velocity = direction * move_speed
+	velocity.x = horizontal_velocity.x
+	velocity.z = horizontal_velocity.z
+
+	# Gravity
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	else:
+		# Jump
+		if Input.is_action_just_pressed("SPACE"):
+			velocity.y = jump_force
+
 	move_and_slide()

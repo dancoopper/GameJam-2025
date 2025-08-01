@@ -1,12 +1,12 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c5ht6tlhbi7o2"]
 
-[ext_resource type="Shader" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="1_8yexd"]
+[ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="1_8yexd"]
 
 [resource]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_8yexd")
-shader_parameter/viewport_indexes = null
-shader_parameter/show_debug = null
-shader_parameter/debug_color = null
 shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
