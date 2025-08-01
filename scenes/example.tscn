@@ -1,9 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://bt75dp3lgj0su"]
+[gd_scene load_steps=16 format=3 uid="uid://bt75dp3lgj0su"]
 
+[ext_resource type="Texture2D" uid="uid://dyiy0heuf6ykb" path="res://addons/sphynx_portal_toolkit/examples/icon.svg" id="1_klr1q"]
 [ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="2_jyhfs"]
 [ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://b8o1iyqac3b85" path="res://scenes/pickable.gd" id="4_ucs8h"]
+[ext_resource type="Script" uid="uid://nbty25767jx5" path="res://addons/sphynx_portal_toolkit/teleporting/teleport_component.gd" id="5_aoc7i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vkub"]
+albedo_texture = ExtResource("1_klr1q")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
 resource_local_to_scene = true
@@ -25,7 +30,14 @@ shader_parameter/debug_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7w8s4"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ucs8h"]
+albedo_color = Color(0.337255, 1, 1, 1)
+emission_enabled = true
+emission = Color(0.273873, 0.273873, 0.273873, 1)
+emission_energy_multiplier = 4.5
+
 [sub_resource type="BoxMesh" id="BoxMesh_ucs8h"]
+material = SubResource("StandardMaterial3D_ucs8h")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7w8s4"]
 sky_top_color = Color(0.509902, 0.438229, 0.308108, 1)
@@ -41,10 +53,11 @@ sky = SubResource("Sky_ucs8h")
 
 [node name="Main" type="Node3D"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="floor" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.329346, 0)
 use_collision = true
 size = Vector3(15.1758, 0.341309, 15.6543)
+material = SubResource("StandardMaterial3D_4vkub")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0278952, 1.68187, -0.492469)
@@ -55,7 +68,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_tefeu")
 other_portal = NodePath("../Portal2")
 
 [node name="Portal2" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("2_jyhfs")]
-transform = Transform3D(-4.23824, 0, 8.74228e-08, 0, 5.53701, 0, -3.70519e-07, 0, -1, 0.0756025, 2.20516, -4.524)
+transform = Transform3D(-4.23824, 0, -8.74228e-08, 0, 5.53701, 0, 3.70519e-07, 0, -1, 0.0756025, 2.20516, -4.524)
 surface_material_override/0 = SubResource("ShaderMaterial_7w8s4")
 other_portal = NodePath("../Portal1")
 
@@ -72,6 +85,14 @@ shape = SubResource("BoxShape3D_7w8s4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D"]
 mesh = SubResource("BoxMesh_ucs8h")
+
+[node name="TeleportComponent" type="Area3D" parent="RigidBody3D" node_paths=PackedStringArray("parent_to_teleport")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00936079, -0.00953484, -0.0216756)
+disable_mode = 2
+collision_layer = 512
+collision_mask = 512
+script = ExtResource("5_aoc7i")
+parent_to_teleport = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aoc7i")
