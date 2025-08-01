@@ -41,7 +41,7 @@ void vertex() {
 void fragment() {
 	vec4 portal_sample = texture(viewport_texture, SCREEN_UV);
 	int inner_texture_id = 0;
-	
+
 	while(inner_texture_id < 10 && portal_sample.rgb == vec3(0, 1, 0)) {
 		portal_sample = texture(inner_textures[inner_texture_id], SCREEN_UV);
 		inner_texture_id++;
@@ -49,12 +49,12 @@ void fragment() {
 	if(portal_sample.rgb == vec3(0, 1, 0)) {
 		portal_sample = vec4(0, 0, 0, 1);
 	}
-	
+
 	vec3 portal_sample_srgb = mix(
 		pow((portal_sample.rgb + vec3(0.055)) * (1.0 / (1.0 + 0.055)), vec3(2.4)),
 		portal_sample.rgb.rgb * (1.0 / 12.92),
 		lessThan(portal_sample.rgb, vec3(0.04045)));
-	
+
 	vec2 centered_uv = UV - vec2(0.5);
 	float further_uv = max(abs(centered_uv.x), abs(centered_uv.y)) * 2.;
 	ALBEDO = portal_sample_srgb + debug_color.xyz / 3. * show_debug;//+ texture(outline_curve, vec2(further_uv, 0)).xyz;//vertex_pos;//
