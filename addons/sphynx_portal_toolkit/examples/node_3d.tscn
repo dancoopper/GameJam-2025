@@ -1,0 +1,316 @@
+[gd_scene load_steps=34 format=3 uid="uid://bkplvx38o8s74"]
+
+[ext_resource type="Texture2D" uid="uid://dyiy0heuf6ykb" path="res://addons/sphynx_portal_toolkit/examples/icon.svg" id="1_7trp7"]
+[ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="1_iuy02"]
+[ext_resource type="Script" uid="uid://dr384h3tpg27a" path="res://addons/sphynx_portal_toolkit/teleporting/splittable_component.gd" id="2_1ik2r"]
+[ext_resource type="Shader" uid="uid://bp2ihin1o8y5n" path="res://addons/sphynx_portal_toolkit/teleporting/splittable_mesh_shader.tres" id="2_vqac7"]
+[ext_resource type="Script" uid="uid://nbty25767jx5" path="res://addons/sphynx_portal_toolkit/teleporting/teleport_component.gd" id="3_8i7u8"]
+[ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="4_r8fyi"]
+[ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="6_t071c"]
+[ext_resource type="Shader" uid="uid://cfwqx7d17e3ug" path="res://addons/sphynx_portal_toolkit/teleporting/clippable_mesh_shader.gdshader" id="8_7qlif"]
+[ext_resource type="Script" uid="uid://b17wdwjc6627j" path="res://addons/sphynx_portal_toolkit/teleporting/clippable_mesh_component.gd" id="9_p7sg1"]
+[ext_resource type="Script" uid="uid://yhcx5mu10jgl" path="res://addons/sphynx_portal_toolkit/examples/mesh_mover.gd" id="10_sjj2r"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7ogde"]
+
+[sub_resource type="Sky" id="Sky_8303w"]
+sky_material = SubResource("ProceduralSkyMaterial_7ogde")
+
+[sub_resource type="Environment" id="Environment_l3skf"]
+background_mode = 2
+sky = SubResource("Sky_8303w")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2i6hs"]
+size = Vector2(40, 40)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pu1cd"]
+render_priority = 0
+shader = ExtResource("8_7qlif")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("1_7trp7")
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(10, 10, 10)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i8qik"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cnlav"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h1ot3"]
+render_priority = 0
+shader = ExtResource("8_7qlif")
+shader_parameter/albedo = Color(0, 1, 0, 1)
+shader_parameter/texture_albedo = ExtResource("1_7trp7")
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dvoxu"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dlggf"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ty4k6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sbdpc"]
+render_priority = 0
+shader = ExtResource("2_vqac7")
+shader_parameter/albedo = Color(1, 0, 0, 1)
+shader_parameter/texture_albedo = ExtResource("1_7trp7")
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/active_split = false
+shader_parameter/split_plane_origin = Vector3(0, 0, 0)
+shader_parameter/split_plane_normal = Vector3(0, 0, 0)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hji50"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_helbj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3pyk"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_t071c")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r506b"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_t071c")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5v7hw"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_t071c")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l50kx"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_t071c")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40evu"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_t071c")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fh4bc"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_t071c")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yj1ju"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_024vf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fd1k6"]
+render_priority = 0
+shader = ExtResource("2_vqac7")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0, 0, 0)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/active_split = false
+shader_parameter/split_plane_origin = Vector3(0, 0, 0)
+shader_parameter/split_plane_normal = Vector3(0, 0, 0)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l3skf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.229914, 0.973211, 0, -0.973211, 0.229914, 0, 0, 0)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_iuy02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20119, 1.86206, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_2i6hs")
+surface_material_override/0 = SubResource("ShaderMaterial_pu1cd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_i8qik")
+
+[node name="ClippableMeshComponent" type="Node" parent="MeshInstance3D" node_paths=PackedStringArray("clippable_mesh")]
+script = ExtResource("9_p7sg1")
+clippable_mesh = NodePath("..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.00068, 0.386267, 0.87815)
+mesh = SubResource("BoxMesh_cnlav")
+surface_material_override/0 = SubResource("ShaderMaterial_h1ot3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_dvoxu")
+
+[node name="ClippableMeshComponent" type="Node" parent="MeshInstance3D2" node_paths=PackedStringArray("clippable_mesh")]
+script = ExtResource("9_p7sg1")
+clippable_mesh = NodePath("..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.06111, 0.386267, 2.0943)
+mesh = SubResource("BoxMesh_cnlav")
+surface_material_override/0 = SubResource("ShaderMaterial_h1ot3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_dlggf")
+
+[node name="ClippableMeshComponent" type="Node" parent="MeshInstance3D3" node_paths=PackedStringArray("clippable_mesh")]
+script = ExtResource("9_p7sg1")
+clippable_mesh = NodePath("..")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04578, 0.561712, 2.40422)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("10_sjj2r")
+
+[node name="ClippableMeshTest" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_ty4k6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_sbdpc")
+
+[node name="TeleportComponent" type="Area3D" parent="RigidBody3D" node_paths=PackedStringArray("parent_to_teleport")]
+collision_layer = 512
+collision_mask = 512
+script = ExtResource("3_8i7u8")
+radius = 0.5
+parent_to_teleport = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_hji50")
+
+[node name="Area3D" type="Area3D" parent="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Area3D"]
+shape = SubResource("SphereShape3D_helbj")
+
+[node name="SplittableComponent" type="Node" parent="RigidBody3D" node_paths=PackedStringArray("mesh_to_split", "mesh_collision", "teleport_component")]
+script = ExtResource("2_1ik2r")
+mesh_to_split = NodePath("../ClippableMeshTest")
+mesh_collision = NodePath("../Area3D")
+teleport_component = NodePath("../TeleportComponent")
+
+[node name="Portal1" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("4_r8fyi")]
+transform = Transform3D(2, 0, 0, 0, 4, 0, 0, 0, 1, 2.0511, 1.86976, -6.25105)
+surface_material_override/0 = SubResource("ShaderMaterial_c3pyk")
+recursions = 1
+other_portal = NodePath("../Portal2")
+
+[node name="Portal2" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("4_r8fyi")]
+transform = Transform3D(1.99641, 0, -0.0599162, 0, 4, 0, 0.119832, 0, 0.998203, 2.0511, 1.86976, 3.82622)
+surface_material_override/0 = SubResource("ShaderMaterial_r506b")
+recursions = 1
+other_portal = NodePath("../Portal1")
+
+[node name="Portal3" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("4_r8fyi")]
+transform = Transform3D(1.715, 0, 0, 0, -7.4965e-08, -1.715, 0, 1.715, -7.4965e-08, -1.311, 1.561, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_5v7hw")
+recursions = 1
+other_portal = NodePath("../Portal4")
+
+[node name="Portal4" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("4_r8fyi")]
+transform = Transform3D(1.715, 0, 0, 0, -7.4965e-08, -1.715, 0, 1.715, -7.4965e-08, -1.31066, 4.24867, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_l50kx")
+recursions = 1
+other_portal = NodePath("../Portal3")
+
+[node name="Portal5" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("4_r8fyi")]
+transform = Transform3D(-2.955, 0, 8.74228e-08, 0, 7.42, 0, -2.58334e-07, 0, -1, 7.87592, 0, -4.69096)
+surface_material_override/0 = SubResource("ShaderMaterial_40evu")
+recursions = 1
+other_portal = NodePath("../Portal6")
+
+[node name="Portal6" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("4_r8fyi")]
+transform = Transform3D(2.955, 0, 0, 0, 7.42, 0, 0, 0, 1, 7.87592, 0, 1.38124)
+surface_material_override/0 = SubResource("ShaderMaterial_fh4bc")
+recursions = 1
+other_portal = NodePath("../Portal5")
+
+[node name="BallDemo" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15374, 2.79185, 0)
+gravity_scale = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BallDemo"]
+shape = SubResource("SphereShape3D_yj1ju")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BallDemo"]
+mesh = SubResource("SphereMesh_024vf")
+surface_material_override/0 = SubResource("ShaderMaterial_fd1k6")
+
+[node name="TeleportComponent" type="Area3D" parent="BallDemo" node_paths=PackedStringArray("parent_to_teleport")]
+disable_mode = 2
+collision_layer = 512
+collision_mask = 512
+script = ExtResource("3_8i7u8")
+radius = 0.5
+parent_to_teleport = NodePath("..")
+
+[node name="SplittableArea" type="Area3D" parent="BallDemo"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BallDemo/SplittableArea"]
+shape = SubResource("SphereShape3D_yj1ju")
+
+[node name="SplittableComponent" type="Node" parent="BallDemo" node_paths=PackedStringArray("mesh_to_split", "mesh_collision", "teleport_component")]
+script = ExtResource("2_1ik2r")
+mesh_to_split = NodePath("../MeshInstance3D")
+mesh_collision = NodePath("../SplittableArea")
+teleport_component = NodePath("../TeleportComponent")
