@@ -11,7 +11,7 @@ shading_mode = 0
 albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r2tip"]
-size = Vector3(1, 1, 0.2)
+size = Vector3(1, 1, 0.200146)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ur7mh"]
 size = Vector3(0.1, 1, 0.2)
@@ -48,6 +48,7 @@ collision_layer = 512
 collision_mask = 512
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PortalDetectionBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00178219)
 shape = SubResource("BoxShape3D_r2tip")
 
 [node name="PortalCollisionBody" type="StaticBody3D" parent="."]

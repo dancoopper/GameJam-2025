@@ -1,5 +1,6 @@
 // Converted Godot 4 Toon/Cel Shader
 shader_type spatial;
+//render_mode depth_test_disabled; // how to add this to the shader parameter?
 
 // --- Uniforms updated for Godot 4 syntax ---
 uniform vec4 albedo : source_color = vec4(1.0);

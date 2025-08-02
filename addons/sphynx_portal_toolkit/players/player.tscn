@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0a7pbpqa6rct"]
+[gd_scene load_steps=12 format=3 uid="uid://b0a7pbpqa6rct"]
 
 [ext_resource type="Script" uid="uid://cjgs28pflpy55" path="res://addons/sphynx_portal_toolkit/examples/character_body_3d.gd" id="1_chsnj"]
 [ext_resource type="Shader" uid="uid://bp2ihin1o8y5n" path="res://addons/sphynx_portal_toolkit/teleporting/splittable_mesh_shader.tres" id="3_pmkgq"]
 [ext_resource type="Script" uid="uid://dr384h3tpg27a" path="res://addons/sphynx_portal_toolkit/teleporting/splittable_component.gd" id="4_h2pnw"]
 [ext_resource type="Script" uid="uid://28g6itvtn14c" path="res://addons/sphynx_portal_toolkit/players/head.gd" id="5_1jt3m"]
 [ext_resource type="Script" uid="uid://nbty25767jx5" path="res://addons/sphynx_portal_toolkit/teleporting/teleport_component.gd" id="6_2t5pr"]
+[ext_resource type="Script" uid="uid://cpm0pc8nxjou8" path="res://scripts/Hand.cs" id="6_chsnj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3dk38"]
 
@@ -27,23 +28,14 @@ shader_parameter/active_split = false
 shader_parameter/split_plane_origin = Vector3(0, 0, 0)
 shader_parameter/split_plane_normal = Vector3(1, 0, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulfrn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chsnj"]
 no_depth_test = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_ulfrn"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("cam")]
 script = ExtResource("1_chsnj")
-cam = NodePath("head/Camera3D")
-
-[node name="TeleportComponent" type="Area3D" parent="." node_paths=PackedStringArray("parent_to_teleport")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.589004, -0.55073)
-disable_mode = 2
-collision_layer = 512
-collision_mask = 512
-script = ExtResource("6_2t5pr")
-radius = 0.1
-parent_to_teleport = NodePath("..")
+cam = NodePath("Camera3D")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_3dk38")
@@ -54,6 +46,7 @@ shape = SubResource("CapsuleShape3D_3dk38")
 shape = SubResource("CapsuleShape3D_3dk38")
 
 [node name="BodyMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.88, 0, 0, 0, 0.88, 0, 0, 0, 0.88, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_7ea08")
 surface_material_override/0 = SubResource("ShaderMaterial_6lq5l")
 
@@ -61,25 +54,32 @@ surface_material_override/0 = SubResource("ShaderMaterial_6lq5l")
 script = ExtResource("4_h2pnw")
 mesh_to_split = NodePath("../BodyMesh")
 mesh_collision = NodePath("../BodyArea")
-teleport_component = NodePath("../TeleportComponent")
+teleport_component = NodePath("../Camera3D/TeleportComponent")
 
-[node name="head" type="Node3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.589004, 0.024841)
+cull_mask = 1048051
 script = ExtResource("5_1jt3m")
 
-[node name="Camera3D" type="Camera3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.589004, -0.55073)
-cull_mask = 1048563
+[node name="TeleportComponent" type="Area3D" parent="Camera3D" node_paths=PackedStringArray("parent_to_teleport")]
+disable_mode = 2
+collision_layer = 512
+collision_mask = 512
+script = ExtResource("6_2t5pr")
+radius = 0.01
+parent_to_teleport = NodePath("../..")
 
-[node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 transform = Transform3D(30.595, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.457034)
-target_position = Vector3(0, 0, -4)
-collision_mask = 3
+target_position = Vector3(0, 0, -3.405)
 
-[node name="hand" type="Node3D" parent="head/Camera3D"]
+[node name="hand" type="Node3D" parent="Camera3D" node_paths=PackedStringArray("Raycast")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.147596, -0.377279, -1.24504)
+script = ExtResource("6_chsnj")
+Raycast = NodePath("../RayCast3D")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="head/Camera3D/hand"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D/hand"]
 transform = Transform3D(0.101991, 0, 0.58972, 0, 0.11, 0, -0.0722696, 0, 0.832244, 0.6049, -0.0793401, 0.495181)
 layers = 3
-material_override = SubResource("StandardMaterial3D_ulfrn")
+material_override = SubResource("StandardMaterial3D_chsnj")
 mesh = SubResource("BoxMesh_ulfrn")

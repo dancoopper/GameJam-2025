@@ -1,17 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c86uu6818k5gv"]
+[gd_scene load_steps=5 format=3 uid="uid://c86uu6818k5gv"]
 
 [ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="1_g2h75"]
 [ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="2_m7ahb"]
 [ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="3_dwgg1"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ru4tf"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_dwgg1")
-shader_parameter/inner_textures = null
-shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-shader_parameter/show_debug = 0.0
-shader_parameter/debug_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m7ahb"]
 resource_local_to_scene = true
@@ -67,19 +58,15 @@ operation = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.92485, 0)
 omni_range = 14.0623
 
-[node name="Portal1" parent="Node3D" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_m7ahb")]
-transform = Transform3D(3.80821, 0, 1.74846e-07, 0, 4.79935, 0, -6.65848e-07, 0, 1, 0.00136614, 2.67157, -6.78072)
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_ru4tf")
-recursions = 1
-other_portal = NodePath("../Portal2")
-
-[node name="Portal2" parent="Node3D" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_m7ahb")]
-transform = Transform3D(3.80821, 0, 0, 0, 2.28453, 0.879441, 0, -4.22074, 0.476008, -0.0955436, 4.75137, 3.01892)
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_m7ahb")
-recursions = 1
-other_portal = NodePath("../Portal1")
-
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_g2h75")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.117927, 2.40613, -0.642668)
+
+[node name="Portal1" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("2_m7ahb")]
+transform = Transform3D(2.78259, 0, 0, 0, 5.27878, 0, 0, 0, 1, -0.0281684, 2.83933, 4.7442)
+surface_material_override/0 = SubResource("ShaderMaterial_m7ahb")
+other_portal = NodePath("../Portal2")
+
+[node name="Portal2" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("2_m7ahb")]
+transform = Transform3D(-2.68777, 0, 0.258819, 0.685845, 1.61063, 0.919867, -0.219739, 5.02706, -0.294717, -0.0281684, 5.10589, -4.14178)
+surface_material_override/0 = SubResource("ShaderMaterial_m7ahb")
+other_portal = NodePath("../Portal1")
