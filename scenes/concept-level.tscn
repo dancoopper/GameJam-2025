@@ -1,6 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://br8qyakdfjkgo"]
+[gd_scene load_steps=16 format=3 uid="uid://c0eog7fm38u74"]
 
-[ext_resource type="Script" uid="uid://b8o1iyqac3b85" path="res://scenes/pickable.gd" id="1_7conr"]
+[ext_resource type="Script" path="res://scenes/pickable.gd" id="1_7conr"]
 [ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="2_brt6c"]
 [ext_resource type="Script" uid="uid://nbty25767jx5" path="res://addons/sphynx_portal_toolkit/teleporting/teleport_component.gd" id="2_vmcjr"]
 [ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="7_20lxg"]
@@ -59,7 +59,7 @@ shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 
 shader_parameter/show_debug = 0.0
 shader_parameter/debug_color = Color(0, 0, 0, 1)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D2" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.129375, -0.733278, 0.667507, 0.529991, 0.620079, 0.578456, -0.838076, 0.278935, 0.468854, 0.94421, 15.7904, -3.23916)

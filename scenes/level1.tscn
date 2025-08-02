@@ -1,10 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://c86uu6818k5gv"]
+[gd_scene load_steps=6 format=3 uid="uid://c86uu6818k5gv"]
 
 [ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="1_g2h75"]
 [ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="2_m7ahb"]
 [ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="3_dwgg1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m7ahb"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_dwgg1")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwgg1"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_dwgg1")
@@ -68,5 +77,5 @@ other_portal = NodePath("../Portal2")
 
 [node name="Portal2" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("2_m7ahb")]
 transform = Transform3D(-2.68777, 0, 0.258819, 0.685845, 1.61063, 0.919867, -0.219739, 5.02706, -0.294717, -0.0281684, 5.10589, -4.14178)
-surface_material_override/0 = SubResource("ShaderMaterial_m7ahb")
+surface_material_override/0 = SubResource("ShaderMaterial_dwgg1")
 other_portal = NodePath("../Portal1")

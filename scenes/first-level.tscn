@@ -1,0 +1,182 @@
+[gd_scene load_steps=13 format=3 uid="uid://d0x8kwfseddop"]
+
+[ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="2_3wa8w"]
+[ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="2_cj3j8"]
+[ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="3_owjap"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3nxw1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rr5bp"]
+sky_top_color = Color(0.509902, 0.438229, 0.308108, 1)
+sky_horizon_color = Color(0.707699, 0.650909, 0.511032, 1)
+ground_bottom_color = Color(0.293635, 0.251835, 0.203321, 1)
+
+[sub_resource type="Sky" id="Sky_ucs8h"]
+sky_material = SubResource("ProceduralSkyMaterial_rr5bp")
+
+[sub_resource type="Environment" id="Environment_8kpij"]
+background_mode = 2
+sky = SubResource("Sky_ucs8h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wa8w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3wa8w"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_owjap")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udngt"]
+albedo_color = Color(1, 1, 0.0666667, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owjap"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mgquc"]
+albedo_color = Color(1, 0.0745098, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor" type="CSGBox3D" parent="."]
+material_override = SubResource("ShaderMaterial_3nxw1")
+use_collision = true
+size = Vector3(56.334, 0.367188, 65.0059)
+
+[node name="Player" parent="." instance=ExtResource("2_3wa8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3161, 1.20309, 10.7282)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Player"]
+transform = Transform3D(0.129375, -0.733278, 0.667507, 0.529991, 0.620079, 0.578456, -0.838076, 0.278935, 0.468854, 0.94421, 15.7904, -3.23916)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Player"]
+environment = SubResource("Environment_8kpij")
+
+[node name="1st Blue" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1.65, 0, 0, 0, 1, 0, 0, 0, 1.8, 12.1912, 0, -13.6021)
+use_collision = true
+
+[node name="Main Circle" type="CSGCylinder3D" parent="1st Blue"]
+transform = Transform3D(0.323633, 0, 0, 0, 0.533436, 0, 0, 0, 0.30165, 0, 3.44, 0)
+use_collision = true
+radius = 22.9658
+height = 12.8906
+sides = 64
+
+[node name="Sub circle" type="CSGCylinder3D" parent="1st Blue/Main Circle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125336, 0.0827389, -0.076704)
+operation = 2
+use_collision = true
+radius = 21.5815
+height = 12.8906
+sides = 64
+material = SubResource("StandardMaterial3D_3wa8w")
+
+[node name="Middle Pillar" type="CSGCylinder3D" parent="1st Blue/Main Circle"]
+transform = Transform3D(5.89516, 0, 0, 0, 1.09189, 0, 0, 0, 5.64556, 0, -0.069109, 0)
+use_collision = true
+height = 12.7898
+sides = 64
+
+[node name="BP" parent="1st Blue" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_cj3j8")]
+transform = Transform3D(8.2086, 0, 0, 0, 13.141, 0, 0, 0, 0.555556, 3.54594, 0.683594, -0.0629196)
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_3wa8w")
+other_portal = NodePath("../../1st Red/RP")
+
+[node name="1st Red" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1.65, 0, 0, 0, 1, 0, 0, 0, 1.8, -13.0141, 0, -13.4473)
+use_collision = true
+
+[node name="Main Circle" type="CSGCylinder3D" parent="1st Red"]
+transform = Transform3D(0.323633, 0, 0, 0, 0.533436, 0, 0, 0, 0.30165, 0, 3.44, 0)
+use_collision = true
+radius = 22.9658
+height = 12.8906
+sides = 64
+
+[node name="Sub circle" type="CSGCylinder3D" parent="1st Red/Main Circle"]
+operation = 2
+use_collision = true
+radius = 21.5815
+height = 12.8906
+sides = 64
+material = SubResource("StandardMaterial3D_udngt")
+
+[node name="Middle Pillar" type="CSGCylinder3D" parent="1st Red/Main Circle"]
+transform = Transform3D(5.89516, 0, 0, 0, 1.09189, 0, 0, 0, 5.64556, 0, -0.069109, 0)
+use_collision = true
+height = 12.7898
+sides = 64
+
+[node name="RP" parent="1st Red" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_cj3j8")]
+transform = Transform3D(8.2086, 0, 0, 0, 13.141, 0, 0, 0, 0.555556, 3.08065, 0.683594, -0.14895)
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_3wa8w")
+other_portal = NodePath("../../2nd Blue/BP2")
+
+[node name="2nd Blue" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1.65, 0, 0, 0, 1, 0, 0, 0, 1.8, 12.1912, 0, 17.5915)
+use_collision = true
+
+[node name="Main Circle" type="CSGCylinder3D" parent="2nd Blue"]
+transform = Transform3D(0.323633, 0, 0, 0, 0.533436, 0, 0, 0, 0.30165, 0, 3.44, 0)
+use_collision = true
+radius = 22.9658
+height = 12.8906
+sides = 64
+
+[node name="Sub circle" type="CSGCylinder3D" parent="2nd Blue/Main Circle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0831127, 0.0446134, 0.00523847)
+operation = 2
+use_collision = true
+radius = 21.5815
+height = 12.8906
+sides = 64
+material = SubResource("StandardMaterial3D_owjap")
+
+[node name="Middle Pillar" type="CSGCylinder3D" parent="2nd Blue/Main Circle"]
+transform = Transform3D(5.89516, 0, 0, 0, 1.09189, 0, 0, 0, 5.64556, -0.00405884, -0.0750337, -0.00699234)
+use_collision = true
+height = 12.7898
+sides = 64
+
+[node name="BP2" parent="2nd Blue" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_cj3j8")]
+transform = Transform3D(8.2086, 0, 0, 0, 13.141, 0, 0, 0, 0.555556, 3.54594, 0.683594, 0.279815)
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_3wa8w")
+other_portal = NodePath("../../2nd Red/RP2")
+
+[node name="2nd Red" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1.65, 0, 0, 0, 1, 0, 0, 0, 1.8, -13.0141, 0, 16.4728)
+use_collision = true
+
+[node name="Main Circle" type="CSGCylinder3D" parent="2nd Red"]
+transform = Transform3D(0.323633, 0, 0, 0, 0.533436, 0, 0, 0, 0.30165, 0, 3.44, 0)
+use_collision = true
+radius = 22.9658
+height = 12.8906
+sides = 64
+
+[node name="Sub circle" type="CSGCylinder3D" parent="2nd Red/Main Circle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0227604, 0, -0.0826359)
+operation = 2
+use_collision = true
+radius = 21.5815
+height = 12.8906
+sides = 64
+material = SubResource("StandardMaterial3D_mgquc")
+
+[node name="Middle Pillar" type="CSGCylinder3D" parent="2nd Red/Main Circle"]
+transform = Transform3D(5.89516, 0, 0, 0, 1.09189, 0, 0, 0, 5.64556, 0, -0.069109, 0)
+use_collision = true
+height = 12.7898
+sides = 64
+
+[node name="RP2" parent="2nd Red" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_cj3j8")]
+transform = Transform3D(8.2086, 0, 0, 0, 13.141, 0, 0, 0, 0.555556, 3.66548, 0.683593, 0.0281248)
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_3wa8w")
+other_portal = NodePath("../../1st Blue/BP")
