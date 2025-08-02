@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="2_jyhfs"]
 [ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="3_tbgi4"]
-[ext_resource type="Script" path="res://scenes/pickable.gd" id="4_ucs8h"]
+[ext_resource type="Script" uid="uid://b8o1iyqac3b85" path="res://scenes/pickable.gd" id="4_ucs8h"]
 [ext_resource type="Script" uid="uid://nbty25767jx5" path="res://addons/sphynx_portal_toolkit/teleporting/teleport_component.gd" id="5_aoc7i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vkub"]

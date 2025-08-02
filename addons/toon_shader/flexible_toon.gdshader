@@ -43,20 +43,20 @@ void fragment() {
 void light() {
 	// The light() function is executed for each light affecting the object.
 	// This is where all lighting calculations should happen for a lit shader.
-	
+
 	// Attenuation.
 	// The ATTENUATION built-in is available in the light() pass.
 	float attenuation = 1.0;
 	if (use_attenuation) {
 		attenuation = ATTENUATION;
 	}
-	
+
 	// Diffuse lighting.
 	// This uses the original, more correct formula with attenuation.
 	float NdotL = dot(NORMAL, LIGHT);
 	float diffuse_amount = NdotL + (attenuation - 1.0) + wrap;
 	diffuse_amount *= steepness;
-	
+
 	// Cel-shading cuts, using the original formula.
 	float cuts_inv = 1.0 / float(cuts);
 	float diffuse_stepped = clamp(diffuse_amount + mod(1.0 - diffuse_amount, cuts_inv), 0.0, 1.0);
@@ -69,7 +69,7 @@ void light() {
 		border = step(diffuse_stepped - corr_border_width, diffuse_amount)
 			   - step(1.0 - corr_border_width, diffuse_amount);
 	}
-	
+
 	// Apply the diffuse result based on the chosen style (ramp or stepped).
 	// ALBEDO is available here because it was set in the fragment() pass.
 	vec3 diffuse_contribution = ALBEDO * LIGHT_COLOR / PI;
@@ -78,14 +78,14 @@ void light() {
 	} else {
 		diffuse_contribution *= diffuse_stepped * (1.0 - border);
 	}
-	
+
 	// The clamp_diffuse_to_max logic now works correctly.
 	if (clamp_diffuse_to_max) {
 		DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse_contribution);
 	} else {
 		DIFFUSE_LIGHT += diffuse_contribution;
 	}
-	
+
 	// Specular lighting calculation.
 	if (use_specular) {
 		vec3 H = normalize(LIGHT + VIEW);
@@ -96,7 +96,7 @@ void light() {
 		specular_amount = split_specular(specular_amount);
 		SPECULAR_LIGHT += specular_strength * specular_amount * LIGHT_COLOR;
 	}
-	
+
 	// Rim lighting calculation.
 	// As per the original shader, this is added to the diffuse light.
 	if (use_rim) {

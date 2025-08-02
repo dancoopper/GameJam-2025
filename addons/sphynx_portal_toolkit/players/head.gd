@@ -6,6 +6,9 @@ extends Node3D
 @onready var hand = $Camera3D/hand
 var held_item: Node3D = null
 
+var pitch := 0.0  # Up/down
+var yaw := 0.0    # Left/right
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -51,8 +54,11 @@ func try_dropoff():
 	held_item = null
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		rotation += Vector3(rad_to_deg(-event.relative.y), rad_to_deg(-event.relative.x), 0) / 10000
-		#draw_process()
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		pitch = clamp(pitch - event.relative.y * 0.005, deg_to_rad(-80), deg_to_rad(80))
+		yaw -= event.relative.x * 0.005
+		
+		rotation = Vector3(pitch, yaw, 0)
+
 	if Input.is_action_just_pressed("ESC"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_VISIBLE
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
