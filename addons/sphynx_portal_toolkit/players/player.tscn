@@ -46,7 +46,6 @@ shape = SubResource("CapsuleShape3D_3dk38")
 shape = SubResource("CapsuleShape3D_3dk38")
 
 [node name="BodyMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.88, 0, 0, 0, 0.88, 0, 0, 0, 0.88, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_7ea08")
 surface_material_override/0 = SubResource("ShaderMaterial_6lq5l")
 
