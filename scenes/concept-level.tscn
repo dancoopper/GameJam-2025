@@ -1,0 +1,196 @@
+[gd_scene load_steps=16 format=3 uid="uid://br8qyakdfjkgo"]
+
+[ext_resource type="Script" uid="uid://b8o1iyqac3b85" path="res://scenes/pickable.gd" id="1_7conr"]
+[ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="2_brt6c"]
+[ext_resource type="Script" uid="uid://nbty25767jx5" path="res://addons/sphynx_portal_toolkit/teleporting/teleport_component.gd" id="2_vmcjr"]
+[ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="7_20lxg"]
+[ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="8_674rg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lpvoh"]
+sky_top_color = Color(0.509902, 0.438229, 0.308108, 1)
+sky_horizon_color = Color(0.707699, 0.650909, 0.511032, 1)
+ground_bottom_color = Color(0.293635, 0.251835, 0.203321, 1)
+
+[sub_resource type="Sky" id="Sky_ucs8h"]
+sky_material = SubResource("ProceduralSkyMaterial_lpvoh")
+
+[sub_resource type="Environment" id="Environment_at5dv"]
+background_mode = 2
+sky = SubResource("Sky_ucs8h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmcjr"]
+albedo_color = Color(0.376471, 0.815686, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7conr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klr1q"]
+albedo_color = Color(0.337255, 1, 1, 1)
+emission_enabled = true
+emission = Color(0.273873, 0.273873, 0.273873, 1)
+emission_energy_multiplier = 4.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_vmcjr"]
+material = SubResource("StandardMaterial3D_klr1q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_20lxg"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("8_674rg")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1gjt"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("8_674rg")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7conr"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("8_674rg")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.129375, -0.733278, 0.667507, 0.529991, 0.620079, 0.578456, -0.838076, 0.278935, 0.468854, 0.94421, 15.7904, -3.23916)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_at5dv")
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.92114)
+material_override = SubResource("StandardMaterial3D_vmcjr")
+use_collision = true
+size = Vector3(128.722, 1, 150.702)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_brt6c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.834763, 1.64847, 0.850876)
+
+[node name="FirstRoom" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.63202, 4.26286, -0.161072)
+operation = 2
+use_collision = true
+size = Vector3(13.6924, 8.15601, 12.6212)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="FirstRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0601196, 0)
+operation = 2
+size = Vector3(11.7627, 8.27625, 10.9141)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="FirstRoom/CSGBox3D3"]
+transform = Transform3D(3.77788, 0, 0, 0, 0, -5.40362, 0, 1, 0, -0.0738363, -1.94863, -5.89981)
+height = 1.01172
+sides = 16
+
+[node name="SecondRoom" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.63202, 4.26286, -31.1716)
+operation = 2
+use_collision = true
+size = Vector3(13.6924, 8.15601, 12.6212)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="SecondRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0601196, 0)
+operation = 2
+size = Vector3(11.7627, 8.27625, 10.9141)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="SecondRoom/CSGBox3D3"]
+transform = Transform3D(3.77788, 0, 0, 0, 0, -5.40362, 0, 1, 0, -0.0738363, -1.94863, -5.89981)
+height = 1.01172
+sides = 16
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="SecondRoom/CSGBox3D3"]
+transform = Transform3D(3.84983e-07, 1, 0, 0, 0, -5.40361, -3.77788, -2.78181e-08, 0, 6.36379, -2.09797, 0.165073)
+height = 1.01172
+sides = 16
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["pickable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.58528, 1.12849, 0)
+script = ExtResource("1_7conr")
+
+[node name="PickUpBlock" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
+shape = SubResource("BoxShape3D_7conr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/PickUpBlock"]
+mesh = SubResource("BoxMesh_vmcjr")
+
+[node name="TeleportComponent" type="Area3D" parent="RigidBody3D" node_paths=PackedStringArray("parent_to_teleport")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00936079, -0.00953484, -0.0216756)
+disable_mode = 2
+collision_layer = 512
+collision_mask = 512
+script = ExtResource("2_vmcjr")
+parent_to_teleport = NodePath("..")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.32417, 3.93383, -15.8735)
+use_collision = true
+size = Vector3(8.77539, 6.81934, 19.2021)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+operation = 2
+size = Vector3(7.69434, 6.81934, 19.3027)
+
+[node name="MainRoom" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4069, 4.67851, -32.2829)
+use_collision = true
+size = Vector3(18.6572, 8.32422, 33.71)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="MainRoom"]
+operation = 2
+size = Vector3(18.0938, 8.32422, 31.9314)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="MainRoom/CSGBox3D3"]
+transform = Transform3D(-7.15256e-07, -1, 0, 0, 0, -5.40361, 3.77788, -5.96046e-08, 0, 9.15678, -2.4535, 0.946199)
+height = 1.01172
+sides = 16
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="MainRoom"]
+transform = Transform3D(1, 0, 0, 0, 3.86572, 0, 0, 0, 1, 0.00422573, -0.531017, 9.49062)
+height = 2.61914
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="MainRoom"]
+transform = Transform3D(1, 0, 0, 0, 3.86572, 0, 0, 0, 1, 0.00422573, -0.520395, -10.196)
+height = 2.67676
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MainRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.37342)
+size = Vector3(18.1631, 8.32056, 0.361328)
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="MainRoom/CSGBox3D"]
+transform = Transform3D(-3.77788, 1.03316e-07, 0, 0, 0, -5.40361, -8.80392e-07, -1, 0, -0.336116, -2.4535, -0.0566673)
+operation = 2
+height = 1.01172
+sides = 16
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="MainRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.3783)
+size = Vector3(18.1631, 8.32056, 0.361328)
+
+[node name="Portal1" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("7_20lxg")]
+transform = Transform3D(-2.75249e-07, 0, -1, 0, 9.29158, 0, 6.29697, 0, -4.37114e-08, -12.5284, 4.57014, -19.3883)
+surface_material_override/0 = SubResource("ShaderMaterial_20lxg")
+recursions = 10
+other_portal = NodePath("../Portal2")
+
+[node name="Portal2" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("7_20lxg")]
+transform = Transform3D(-2.75249e-07, 0, -1, 0, 9.29158, 0, 6.29697, 0, -4.37114e-08, -12.5284, 4.57014, -45.7373)
+surface_material_override/0 = SubResource("ShaderMaterial_a1gjt")
+recursions = 10
+other_portal = NodePath("../Portal1")
+
+[node name="Portal3" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("7_20lxg")]
+transform = Transform3D(-2.75249e-07, 0, -1, 0, 9.29158, 0, 6.29697, 0, -4.37114e-08, -12.5284, 4.57014, -38.9321)
+surface_material_override/0 = SubResource("ShaderMaterial_7conr")
+recursions = 10
+other_portal = NodePath("../Portal1")
