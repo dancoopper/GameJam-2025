@@ -69,7 +69,7 @@ recursions = 3
 other_portal = NodePath("../Portal2")
 
 [node name="Portal2" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("2_jyhfs")]
-transform = Transform3D(-4.23824, 0, -8.74228e-08, 0, 5.53701, 0, 3.70519e-07, 0, -1, 0.0756025, 2.43496, -4.524)
+transform = Transform3D(-4.23824, 0, -8.74228e-08, 0, 5.53701, 0, 3.70519e-07, 0, -1, 0.0756025, 2.43496, -4.64476)
 surface_material_override/0 = SubResource("ShaderMaterial_7w8s4")
 recursions = 3
 other_portal = NodePath("../Portal1")
@@ -98,3 +98,8 @@ parent_to_teleport = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aoc7i")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0133667, 3.97311, -5.16832)
+use_collision = true
+size = Vector3(9.49963, 8.94623, 1)

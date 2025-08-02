@@ -55,7 +55,7 @@ teleport_component = NodePath("../head/Camera3D/TeleportComponent")
 script = ExtResource("5_1jt3m")
 
 [node name="Camera3D" type="Camera3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.589004, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.589004, -0.55073)
 cull_mask = 1048563
 
 [node name="TeleportComponent" type="Area3D" parent="head/Camera3D" node_paths=PackedStringArray("parent_to_teleport")]

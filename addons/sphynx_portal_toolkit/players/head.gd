@@ -55,7 +55,7 @@ func try_dropoff():
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		pitch = clamp(pitch - event.relative.y * 0.005, deg_to_rad(-80), deg_to_rad(80))
+		pitch = clamp(pitch - event.relative.y * 0.005, deg_to_rad(-70), deg_to_rad(70))
 		yaw -= event.relative.x * 0.005
 		
 		rotation = Vector3(pitch, yaw, 0)
