@@ -5,6 +5,11 @@ extends CharacterBody3D
 @export var jump_force: float = 8.0
 @export var gravity: float = 20.0
 
+var default_rotation
+
+func _ready():
+	default_rotation = rotation
+
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("A", "D", "S", "W")
 	
@@ -22,6 +27,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	else:
+		if rotation != default_rotation:
+			rotation = rotation.slerp(default_rotation, 5.0 * delta)
 		# Jump
 		if Input.is_action_just_pressed("SPACE"):
 			velocity.y = jump_force

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="2_jyhfs"]
 [ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="3_tbgi4"]
-[ext_resource type="Script" uid="uid://b8o1iyqac3b85" path="res://scenes/pickable.gd" id="4_ucs8h"]
+[ext_resource type="Script" path="res://scenes/pickable.gd" id="4_ucs8h"]
 [ext_resource type="Script" uid="uid://nbty25767jx5" path="res://addons/sphynx_portal_toolkit/teleporting/teleport_component.gd" id="5_aoc7i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vkub"]
@@ -56,20 +56,20 @@ sky = SubResource("Sky_ucs8h")
 [node name="floor" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.329346, 0)
 use_collision = true
-size = Vector3(15.1758, 0.341309, 15.6543)
+size = Vector3(22.7327, 0.341309, 23.0908)
 material = SubResource("StandardMaterial3D_4vkub")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0278952, 1.68187, -0.492469)
 
 [node name="Portal1" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("2_jyhfs")]
-transform = Transform3D(-4.23824, 0, 8.74228e-08, 0, 5.53701, 0, -3.70519e-07, 0, -1, 0.0756025, 2.20516, 4.46049)
+transform = Transform3D(-4.23824, 0, 8.74228e-08, -2.56462e-07, 3.99626, -0.692168, -2.67417e-07, -3.83254, -0.721736, 0.0756025, 4.85518, 4.19918)
 surface_material_override/0 = SubResource("ShaderMaterial_tefeu")
 recursions = 3
 other_portal = NodePath("../Portal2")
 
 [node name="Portal2" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("2_jyhfs")]
-transform = Transform3D(-4.23824, 0, -8.74228e-08, 0, 5.53701, 0, 3.70519e-07, 0, -1, 0.0756025, 2.20516, -4.524)
+transform = Transform3D(-4.23824, 0, -8.74228e-08, 0, 5.53701, 0, 3.70519e-07, 0, -1, 0.0756025, 2.43496, -4.524)
 surface_material_override/0 = SubResource("ShaderMaterial_7w8s4")
 recursions = 3
 other_portal = NodePath("../Portal1")

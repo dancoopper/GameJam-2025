@@ -54,7 +54,17 @@ func teleport():
 	var temp_portal_in_contact : Portal = portal_in_contact
 	portal_in_contact = null
 	var teleport_transform : Transform3D = temp_portal_in_contact.other_portal.global_transform * temp_portal_in_contact.global_transform.affine_inverse() 
+	
+	#parent_to_teleport.global_position = parent_to_teleport.global_position = 
+	#teleport_transform.rotated(parent_to_teleport.rotation, 0)
+	#var temp_rotation = Vector3(
+		#parent_to_teleport.rotation.x,
+		#parent_to_teleport.rotation.y,
+		#parent_to_teleport.rotation.z
+	#)
 	parent_to_teleport.global_transform = teleport_transform * parent_to_teleport.global_transform
+	#parent_to_teleport.rotation = temp_rotation
+	
 	if parent_to_teleport is RigidBody3D:
 		parent_to_teleport.linear_velocity = teleport_transform.basis * parent_to_teleport.linear_velocity
 		parent_to_teleport.angular_velocity = teleport_transform.basis * parent_to_teleport.angular_velocity
