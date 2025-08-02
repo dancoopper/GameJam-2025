@@ -1,13 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://bt75dp3lgj0su"]
+[gd_scene load_steps=15 format=3 uid="uid://bt75dp3lgj0su"]
 
 [ext_resource type="Texture2D" uid="uid://dyiy0heuf6ykb" path="res://addons/sphynx_portal_toolkit/examples/icon.svg" id="1_klr1q"]
 [ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="2_jyhfs"]
 [ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="3_tbgi4"]
-[ext_resource type="Script" uid="uid://nbty25767jx5" path="res://addons/sphynx_portal_toolkit/teleporting/teleport_component.gd" id="5_aoc7i"]
-[ext_resource type="Material" path="res://addons/toon_shader/FlexibleToonMaterial.tres" id="6_1ywam"]
 [ext_resource type="Script" uid="uid://b28ot3nxjopjx" path="res://scripts/Pickable.cs" id="8_1ywam"]
-[ext_resource type="Shader" uid="uid://c7ki67duv3rhd" path="res://addons/toon_shader/flexible_toon.gdshader" id="8_ba3wm"]
+[ext_resource type="PackedScene" uid="uid://cc275vpyc3auj" path="res://components/teleport_component.tscn" id="8_ba3wm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vkub"]
 albedo_texture = ExtResource("1_klr1q")
@@ -30,34 +28,6 @@ shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 
 shader_parameter/show_debug = 0.0
 shader_parameter/debug_color = Color(0, 0, 0, 1)
 
-[sub_resource type="GDScript" id="GDScript_1ywam"]
-script/source = "extends RigidBody3D
-
-var _target: Node3D = null;
-
-func _process(delta):
-	if _target:
-		position = _target.global_position
-
-func on_dropoff():
-	_target = null
-	linear_velocity = Vector3(0.1, 3, 0.1)
-
-func on_pickup(target: Node3D):
-	_target = target
-"
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_7w8s4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ucs8h"]
-albedo_color = Color(0.337255, 1, 1, 1)
-emission_enabled = true
-emission = Color(0.273873, 0.273873, 0.273873, 1)
-emission_energy_multiplier = 4.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_ucs8h"]
-material = SubResource("StandardMaterial3D_ucs8h")
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7w8s4"]
 sky_top_color = Color(0.509902, 0.438229, 0.308108, 1)
 sky_horizon_color = Color(0.707699, 0.650909, 0.511032, 1)
@@ -70,28 +40,9 @@ sky_material = SubResource("ProceduralSkyMaterial_7w8s4")
 background_mode = 2
 sky = SubResource("Sky_ucs8h")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ba3wm"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_4vkub"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hvnp"]
-render_priority = -1
-shader = ExtResource("8_ba3wm")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/clamp_diffuse_to_max = false
-shader_parameter/cuts = 3
-shader_parameter/wrap = 0.0
-shader_parameter/steepness = 1.0
-shader_parameter/use_attenuation = true
-shader_parameter/use_specular = true
-shader_parameter/specular_strength = 1.0
-shader_parameter/specular_shininess = 16.0
-shader_parameter/use_rim = true
-shader_parameter/rim_width = 8.0
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/use_ramp = false
-shader_parameter/use_borders = false
-shader_parameter/border_width = 0.01
-
-[sub_resource type="SphereMesh" id="SphereMesh_sbkjb"]
+[sub_resource type="SphereMesh" id="SphereMesh_1ywam"]
 
 [node name="Main" type="Node3D"]
 
@@ -102,7 +53,7 @@ size = Vector3(22.7327, 0.341309, 23.0908)
 material = SubResource("StandardMaterial3D_4vkub")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0278952, 1.68187, -0.492469)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0278952, 1.68187, 3.08464)
 
 [node name="Portal1" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("2_jyhfs")]
 transform = Transform3D(-4.23824, 0, 8.74228e-08, -2.56462e-07, 3.99626, -0.692168, -2.67417e-07, -3.83254, -0.721736, 0.0756025, 4.85518, 4.19918)
@@ -119,47 +70,24 @@ other_portal = NodePath("../Portal1")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.129375, -0.733278, 0.667507, 0.529991, 0.620079, 0.578456, -0.838076, 0.278935, 0.468853, 0, 5.80767, 0)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["pickable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.58528, 1.12849, 9.80456)
-visible = false
-script = SubResource("GDScript_1ywam")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
-shape = SubResource("BoxShape3D_7w8s4")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D"]
-material_override = ExtResource("6_1ywam")
-mesh = SubResource("BoxMesh_ucs8h")
-
-[node name="TeleportComponent" type="Area3D" parent="RigidBody3D" node_paths=PackedStringArray("parent_to_teleport")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00936079, -0.00953484, -0.0216756)
-disable_mode = 2
-collision_layer = 512
-collision_mask = 512
-script = ExtResource("5_aoc7i")
-parent_to_teleport = NodePath("..")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aoc7i")
 
-[node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.48842, 2.45959, 0)
-can_sleep = false
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.940413, 0.340035, 0, -0.340035, 0.940413, 3.91743, 1.11337, -1.70914)
+use_collision = true
+size = Vector3(2.11035, 1, 4.11523)
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.54834, -1.21692)
+collision_layer = 16
 script = ExtResource("8_1ywam")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
-transform = Transform3D(0.873229, -0.487311, 0, 0.463017, 0.829695, 0.311804, -0.151946, -0.272276, 0.950146, 0, 0, 0)
-shape = SubResource("SphereShape3D_ba3wm")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+shape = SubResource("SphereShape3D_4vkub")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2/CollisionShape3D"]
-material_override = SubResource("ShaderMaterial_3hvnp")
-mesh = SubResource("SphereMesh_sbkjb")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+mesh = SubResource("SphereMesh_1ywam")
 
-[node name="TeleportComponent" type="Area3D" parent="RigidBody3D2" node_paths=PackedStringArray("parent_to_teleport")]
-disable_mode = 2
-collision_layer = 512
-collision_mask = 512
-script = ExtResource("5_aoc7i")
-radius = 0.5
+[node name="TeleportComponent" parent="RigidBody3D3" node_paths=PackedStringArray("parent_to_teleport") instance=ExtResource("8_ba3wm")]
 parent_to_teleport = NodePath("..")

@@ -71,6 +71,7 @@ parent_to_teleport = NodePath("../..")
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 transform = Transform3D(30.595, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.457034)
 target_position = Vector3(0, 0, -3.405)
+collision_mask = 16
 
 [node name="hand" type="Node3D" parent="Camera3D" node_paths=PackedStringArray("Raycast")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.147596, -0.377279, -1.24504)

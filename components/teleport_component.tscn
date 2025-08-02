@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc275vpyc3auj"]
+
+[ext_resource type="Script" uid="uid://nbty25767jx5" path="res://addons/sphynx_portal_toolkit/teleporting/teleport_component.gd" id="1_t1kdo"]
+
+[node name="TeleportComponent" type="Area3D" node_paths=PackedStringArray("parent_to_teleport")]
+disable_mode = 2
+collision_layer = 512
+collision_mask = 512
+script = ExtResource("1_t1kdo")
+radius = 0.5
+parent_to_teleport = NodePath("")

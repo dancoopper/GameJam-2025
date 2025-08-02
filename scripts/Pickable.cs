@@ -12,6 +12,7 @@ public partial class Pickable : RigidBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		GD.Print(this.CollisionLayer);
 		if (_target is not null)
 		{
 			Position = _target.GlobalPosition;
@@ -24,14 +25,14 @@ public partial class Pickable : RigidBody3D
 	public virtual void Pick(Node3D target)
 	{
 		_target = target;
-		this.CollisionLayer = 2;
+		this.CollisionLayer = (uint)(1 << 5); // 5 is 6 in the collision layer
 		LinearVelocity = Vector3.Zero;
 		AngularVelocity = Vector3.Zero;
 	}
 
 	public virtual void Drop()
 	{
-		this.CollisionLayer = 1;
+		this.CollisionLayer = (uint)(1 << 4); // 4 is 5 in the collision layer
 		LinearVelocity = new Vector3(0, 3, 0);
 		//LinearVelocity = (Position - _previousPosition);
 		AngularVelocity = Vector3.Zero;
