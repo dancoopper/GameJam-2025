@@ -52,9 +52,6 @@ use_collision = true
 size = Vector3(22.7327, 0.341309, 23.0908)
 material = SubResource("StandardMaterial3D_4vkub")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0278952, 1.68187, 3.08464)
-
 [node name="Portal1" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("2_jyhfs")]
 transform = Transform3D(-4.23824, 0, 8.74228e-08, -2.56462e-07, 3.99626, -0.692168, -2.67417e-07, -3.83254, -0.721736, 0.0756025, 4.85518, 4.19918)
 surface_material_override/0 = SubResource("ShaderMaterial_tefeu")
@@ -91,3 +88,6 @@ mesh = SubResource("SphereMesh_1ywam")
 
 [node name="TeleportComponent" parent="RigidBody3D3" node_paths=PackedStringArray("parent_to_teleport") instance=ExtResource("8_ba3wm")]
 parent_to_teleport = NodePath("..")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0278952, 1.68187, 3.08464)

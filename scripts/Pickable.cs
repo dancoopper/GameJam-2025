@@ -12,7 +12,6 @@ public partial class Pickable : RigidBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		GD.Print(this.CollisionLayer);
 		if (_target is not null)
 		{
 			Position = _target.GlobalPosition;

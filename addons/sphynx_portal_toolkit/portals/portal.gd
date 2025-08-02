@@ -27,6 +27,10 @@ static var clip_planes_texture : ImageTexture:
 
 @export var portal_detection_body : CollisionObject3D
 
+#@export var player_viewport: SubViewport
+
+#var camera_3d
+
 @export var other_portal : Portal :
 	set(value):
 		other_portal = value
@@ -54,6 +58,9 @@ var all_cameras : Array[Camera3D]
 func _ready() -> void:
 	if !other_portal:
 		disable_portal()
+		
+	#camera_3d = player_viewport.get_camera_3d()
+	
 	subscribe_portal(self)
 	portal_viewport.size = get_window().size
 	sync_camera_index(portal_camera, self)
@@ -104,17 +111,22 @@ func _process(delta: float) -> void:
 	
 	var teleport_transform : Transform3D = other_portal.global_transform * global_transform.affine_inverse()
 	var current_iter_transform : Transform3D = teleport_transform * get_viewport().get_camera_3d().global_transform
+	#var current_iter_transform : Transform3D = teleport_transform * camera_3d.global_transform
+	
 	portal_camera.global_transform = current_iter_transform
 	portal_camera.fov = get_viewport().get_camera_3d().fov
+	#portal_camera.fov = camera_3d.fov
 	for camera in all_cameras:
 		current_iter_transform = teleport_transform * current_iter_transform
 		camera.global_transform = current_iter_transform
 		camera.fov = get_viewport().get_camera_3d().fov
+		#camera.fov = camera_3d.fov
 	
 	var clip_plane_origin : Vector3 = other_portal.global_position
 	var clip_plane_normal : Vector3 = other_portal.global_basis.z.normalized()
 	
 	if (global_basis.z.normalized().dot(get_viewport().get_camera_3d().global_position - global_position) > 0):
+	#if (global_basis.z.normalized().dot(camera_3d.global_position - global_position) > 0):
 		clip_plane_normal = -clip_plane_normal
 	
 	Portal.clip_planes_image.set_pixelv(Vector2(all_portals[self] * 2, 0), Color(clip_plane_origin.x, clip_plane_origin.y, clip_plane_origin.z, 1))
