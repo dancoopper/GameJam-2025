@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxlgskffhkqtu"]
+
+[ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="1_qyetb"]
+[ext_resource type="Shader" uid="uid://d0wfdr6agmfs0" path="res://addons/sphynx_portal_toolkit/portals/portal.gdshader" id="2_jyq2n"]
+[ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="3_7uttt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qyetb"]
+
+[sub_resource type="Sky" id="Sky_jyq2n"]
+sky_material = SubResource("ProceduralSkyMaterial_qyetb")
+process_mode = 2
+
+[sub_resource type="Environment" id="Environment_7uttt"]
+background_mode = 2
+sky = SubResource("Sky_jyq2n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyetb"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyq2n"]
+albedo_color = Color(0.577816, 0.681199, 0.0755199, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7uttt"]
+albedo_color = Color(0.0823529, 0.792157, 0.996078, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6lxtr"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_jyq2n")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, -0.00659946, 0)
+use_collision = true
+size = Vector3(40, 0.09, 40)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_7uttt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.20495, 6.20295, 5.3994)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7uttt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 248.927, 201.22, 74.9724)
+
+[node name="Triangle" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Triangle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.72777, 0)
+radius = 19.8672
+height = 16.1064
+sides = 3
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Triangle/CSGCylinder3D"]
+operation = 2
+radius = 18.2261
+height = 18.9805
+sides = 3
+material = SubResource("StandardMaterial3D_qyetb")
+
+[node name="Triangle2" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35.7792)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Triangle2"]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 10.5167, 7.72777, -16.0363)
+radius = 19.8672
+height = 16.1064
+sides = 3
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Triangle2/CSGCylinder3D"]
+operation = 2
+radius = 18.2261
+height = 18.9805
+sides = 3
+material = SubResource("StandardMaterial3D_jyq2n")
+
+[node name="Triangle3" type="CSGCombiner3D" parent="."]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 10.4012, 0, -19.3977)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Triangle3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.72777, 0)
+radius = 19.8672
+height = 16.1064
+sides = 3
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Triangle3/CSGCylinder3D"]
+operation = 2
+radius = 18.2261
+height = 18.9805
+sides = 3
+material = SubResource("StandardMaterial3D_7uttt")
+
+[node name="Portal1" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("1_qyetb")]
+transform = Transform3D(25.005, 0, 7.50142, 0, 14.2897, 0, 12.6047, 0, -14.8813, 3.82254, 6.4884, -6.2194)
+surface_material_override/0 = SubResource("ShaderMaterial_6lxtr")
+other_portal = NodePath("../Portal2")
+
+[node name="Portal2" parent="." node_paths=PackedStringArray("other_portal") instance=ExtResource("1_qyetb")]
+transform = Transform3D(24.2751, 0, 8.30731, 0, 14.2897, 0, 13.9588, 0, -14.4469, 6.40922, 6.4884, -12.9205)
+surface_material_override/0 = SubResource("ShaderMaterial_6lxtr")
+other_portal = NodePath("../Portal1")

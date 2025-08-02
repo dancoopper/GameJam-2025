@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0x8kwfseddop"]
+[gd_scene load_steps=16 format=3 uid="uid://d0x8kwfseddop"]
 
 [ext_resource type="PackedScene" uid="uid://b0a7pbpqa6rct" path="res://addons/sphynx_portal_toolkit/players/player.tscn" id="2_3wa8w"]
 [ext_resource type="PackedScene" uid="uid://d3b3awue80a6c" path="res://addons/sphynx_portal_toolkit/portals/portal_scene.tscn" id="2_cj3j8"]
@@ -32,11 +32,38 @@ shader_parameter/debug_color = Color(0, 0, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udngt"]
 albedo_color = Color(1, 1, 0.0666667, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cj3j8"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_owjap")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owjap"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_owjap"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_owjap")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mgquc"]
 albedo_color = Color(1, 0.0745098, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udngt"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_owjap")
+shader_parameter/inner_textures = null
+shader_parameter/viewport_indexes = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/show_debug = 0.0
+shader_parameter/debug_color = Color(0, 0, 0, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -114,7 +141,7 @@ sides = 64
 [node name="RP" parent="1st Red" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_cj3j8")]
 transform = Transform3D(8.2086, 0, 0, 0, 13.141, 0, 0, 0, 0.555556, 3.08065, 0.683594, -0.14895)
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_3wa8w")
+surface_material_override/0 = SubResource("ShaderMaterial_cj3j8")
 other_portal = NodePath("../../2nd Blue/BP2")
 
 [node name="2nd Blue" type="CSGCombiner3D" parent="."]
@@ -146,7 +173,7 @@ sides = 64
 [node name="BP2" parent="2nd Blue" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_cj3j8")]
 transform = Transform3D(8.2086, 0, 0, 0, 13.141, 0, 0, 0, 0.555556, 3.54594, 0.683594, 0.279815)
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_3wa8w")
+surface_material_override/0 = SubResource("ShaderMaterial_owjap")
 other_portal = NodePath("../../2nd Red/RP2")
 
 [node name="2nd Red" type="CSGCombiner3D" parent="."]
@@ -178,5 +205,5 @@ sides = 64
 [node name="RP2" parent="2nd Red" node_paths=PackedStringArray("other_portal") instance=ExtResource("2_cj3j8")]
 transform = Transform3D(8.2086, 0, 0, 0, 13.141, 0, 0, 0, 0.555556, 3.66548, 0.683593, 0.0281248)
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_3wa8w")
+surface_material_override/0 = SubResource("ShaderMaterial_udngt")
 other_portal = NodePath("../../1st Blue/BP")
