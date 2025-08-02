@@ -98,8 +98,3 @@ parent_to_teleport = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aoc7i")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0133667, 3.97311, -5.16832)
-use_collision = true
-size = Vector3(9.49963, 8.94623, 1)
