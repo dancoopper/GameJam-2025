@@ -27,8 +27,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	else:
-		if rotation != default_rotation:
-			rotation = rotation.slerp(default_rotation, 5.0 * delta)
+		#if rotation != default_rotation:
+			#rotation = rotation.slerp(default_rotation, 5.0 * delta)
 		# Jump
 		if Input.is_action_just_pressed("SPACE"):
 			velocity.y = jump_force

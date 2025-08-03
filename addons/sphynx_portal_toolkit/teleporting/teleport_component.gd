@@ -63,6 +63,12 @@ func teleport():
 		#parent_to_teleport.rotation.z
 	#)
 	parent_to_teleport.global_transform = teleport_transform * parent_to_teleport.global_transform
+
+	# if parent_to_teleport is CharacterBody3D:
+	# change its up direction
+	# if parent_to_teleport is RigidBody3D:
+	# change its gravity
+
 	#parent_to_teleport.rotation = temp_rotation
 	
 	if parent_to_teleport is RigidBody3D:
